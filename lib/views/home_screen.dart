@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localloud/controller/theme_controller.dart';
 import 'package:localloud/utils/constants/app_assets.dart';
+import 'package:localloud/views/widgets/post_card.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,8 +43,18 @@ class HomeScreen extends StatelessWidget {
       ],
     );
     return Scaffold(
-      body: const Column(
-        children: [],
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 12,
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return PostCard();
+              }),
+        ),
       ),
       appBar: homeAppBar,
     );
