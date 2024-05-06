@@ -64,13 +64,14 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  Future<void> logout() async {
+  Future<bool> logout() async {
     isLoading = true;
     try {
       await _sharedPreferencesHelper.removeToken();
+      return true;
     } catch (e) {
       log("Error Logout: $e --> logout(AuthController)");
-      rethrow;
+      return false;
     } finally {
       isLoading = false;
     }

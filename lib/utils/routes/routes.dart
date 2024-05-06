@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:localloud/views/home_screen.dart';
-import 'package:localloud/views/screens/splash_screen.dart';
+import 'package:localloud/views/home_view.dart';
+import 'package:localloud/views/screens/splash_view.dart';
 
 import '../../views/login_view.dart';
 
@@ -8,10 +8,10 @@ class AppRoutes {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteNames.splash:
-        return animatedRouteBuilder(const SplashScreen());
+        return animatedRouteBuilder(const SplashView());
 
       case RouteNames.home:
-        return animatedRouteBuilder(const HomeScreen());
+        return animatedRouteBuilder(const HomeView());
 
       case RouteNames.login:
         return animatedRouteBuilder(LoginView());

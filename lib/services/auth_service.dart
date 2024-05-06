@@ -24,8 +24,10 @@ class AuthService {
         final accessToken = response.data['access_token'];
         return accessToken;
       }
+      return null;
     } catch (e) {
       log("Error Login: $e --> login(AuthService)");
+      rethrow;
     }
   }
 

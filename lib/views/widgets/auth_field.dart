@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:localloud/controller/theme_controller.dart';
 import 'package:localloud/utils/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 class AuthTextField extends StatefulWidget {
   final TextEditingController? controller;
@@ -33,7 +35,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
       style: GoogleFonts.fredoka(
         fontSize: double.tryParse("15.0"),
         fontWeight: FontWeight.w500,
-        color: AppColors.lightBackground,
+        color: context.read<ThemeController>().isDarkMode
+            ? AppColors.lightBackground
+            : AppColors.darkBackground,
       ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -48,19 +52,25 @@ class _AuthTextFieldState extends State<AuthTextField> {
         hintStyle: GoogleFonts.fredoka(
           fontSize: double.tryParse("15.0"),
           fontWeight: FontWeight.w500,
-          color: AppColors.lightBackground,
+          color: context.read<ThemeController>().isDarkMode
+              ? AppColors.lightBackground
+              : AppColors.darkBackground,
         ),
         prefixIcon: widget.prefixIcon != null
             ? Icon(
                 widget.prefixIcon,
-                color: AppColors.lightBackground,
+                color: context.read<ThemeController>().isDarkMode
+                    ? AppColors.lightBackground
+                    : AppColors.darkBackground,
               )
             : null,
         suffixIcon: widget.isPasswordField
             ? IconButton(
                 icon: Icon(
                   isObscure ? Icons.visibility : Icons.visibility_off,
-                  color: AppColors.lightBackground,
+                  color: context.read<ThemeController>().isDarkMode
+                      ? AppColors.lightBackground
+                      : AppColors.darkBackground,
                 ),
                 onPressed: () {
                   setState(() {

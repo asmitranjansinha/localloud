@@ -6,14 +6,14 @@ import 'package:localloud/utils/constants/app_assets.dart';
 import 'package:localloud/utils/routes/routes.dart';
 import 'package:provider/provider.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashView extends StatefulWidget {
+  const SplashView({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashViewState extends State<SplashView> {
   bool isLoggedIn = false;
 
   checkToken() async {
