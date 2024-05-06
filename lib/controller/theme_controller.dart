@@ -24,6 +24,7 @@ class ThemeController extends ChangeNotifier {
   set isDarkMode(bool value) {
     _isDarkMode = value;
     notifyListeners();
+    print("Dark Mode: $_isDarkMode");
     _savePrefs();
   }
 
@@ -70,6 +71,6 @@ class ThemeController extends ChangeNotifier {
   // saves value of key "isDarkMode" (bool)
   _savePrefs() async {
     await _prefs?.setBool(PrefsConstants.systemTheme, _isSystemTheme);
-    await _prefs?.setBool(PrefsConstants.darkMode, _isDarkMode);
+    await _prefs!.setBool(PrefsConstants.darkMode, _isDarkMode);
   }
 }

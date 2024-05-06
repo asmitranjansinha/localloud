@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:localloud/controller/auth_controller.dart';
+import 'package:localloud/controller/home_controller.dart';
 import 'package:localloud/controller/theme_controller.dart';
 import 'package:localloud/utils/constants/app_constants.dart';
 import 'package:localloud/utils/routes/routes.dart';
@@ -10,6 +12,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeController()),
+        ChangeNotifierProvider(create: (_) => HomeController()),
+        ChangeNotifierProvider(create: (_) => AuthController()),
       ],
       child: LocalLoud(
         appTheme: AppTheme(),
