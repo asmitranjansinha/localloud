@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localloud/controller/auth_controller.dart';
 import 'package:localloud/controller/theme_controller.dart';
+import 'package:localloud/controller/user_controller.dart';
+import 'package:localloud/models/user_model.dart';
 import 'package:localloud/utils/constants/app_dimensions.dart';
 import 'package:localloud/utils/routes/routes.dart';
 import 'package:localloud/utils/theme/theme.dart';
@@ -12,12 +14,14 @@ import 'package:localloud/views/widgets/auth_field.dart';
 import 'package:provider/provider.dart';
 
 class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
+  SettingsView({super.key});
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<ThemeController, AuthController>(
-        builder: (context, themeController, authController, child) {
+    return Consumer3<ThemeController, AuthController, UserController>(builder:
+        (context, themeController, authController, userController, child) {
       return Scaffold(
         // App Bar
         appBar: AppBar(
@@ -40,23 +44,67 @@ class SettingsView extends StatelessWidget {
               verticalSpace(20.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Column(
-                  children: [
-                    AuthTextField(hintText: "name"),
-                    verticalSpace(10.0),
-                    AuthTextField(hintText: "email"),
-                    verticalSpace(10.0),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 140.0,
-                          child: AuthTextField(hintText: "age"),
-                        ),
-                        horizontalSpace(50.0),
-                        AppButton(title: "Save")
-                      ],
-                    ),
-                  ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      AuthTextField(
+                        hintText: "name",
+                        controller: userController.nameController,
+                        validator: (p0) {
+                          if (p0!.isEmpty) {
+                            return "Name cannot be empty!";
+                          }
+                          return null;
+                        },
+                      ),
+                      verticalSpace(10.0),
+                      AuthTextField(
+                        hintText: "email",
+                        controller: userController.emailController,
+                        validator: (p0) {
+                          if (p0!.isEmpty) {
+                            return "Email cannot be empty!";
+                          }
+                          return null;
+                        },
+                      ),
+                      verticalSpace(10.0),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 140.0,
+                            child: AuthTextField(
+                              hintText: "age",
+                              controller: userController.ageController,
+                              validator: (p0) {
+                                if (p0!.isEmpty) {
+                                  return "Age cannot be empty!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          horizontalSpace(50.0),
+                          AppButton(
+                            title: "Save",
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                userController.updateUser(
+                                  UserModel(
+                                    name: userController.nameController.text,
+                                    email: userController.emailController.text,
+                                    age: int.parse(
+                                        userController.ageController.text),
+                                  ),
+                                );
+                              }
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               verticalSpace(20.0),
@@ -90,7 +138,10 @@ class SettingsView extends StatelessWidget {
                   final isLoggedOut = await authController.logout();
                   if (isLoggedOut) {
                     Navigator.pushNamedAndRemoveUntil(
-                        context, RouteNames.login, (route) => false);
+                      context,
+                      RouteNames.login,
+                      (route) => false,
+                    );
                   }
                 },
               )

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:localloud/controller/auth_controller.dart';
+import 'package:localloud/views/widgets/app_button.dart';
 import 'package:localloud/views/widgets/auth_field.dart';
 import 'package:provider/provider.dart';
 
@@ -59,8 +60,8 @@ class LoginView extends StatelessWidget {
                   },
                 ),
                 verticalSpace(20.0),
-                ElevatedButton(
-                  onPressed: () async {
+                AppButton(
+                  onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       if (authController.isRegisterMode) {
                         final isLoggedIn = await authController.register(
@@ -85,8 +86,7 @@ class LoginView extends StatelessWidget {
                       }
                     }
                   },
-                  child: Text(
-                      authController.isRegisterMode ? "Register" : "Login"),
+                  title: authController.isRegisterMode ? "Register" : "Login",
                 ),
                 verticalSpace(20.0),
                 Row(

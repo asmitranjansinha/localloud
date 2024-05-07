@@ -11,7 +11,7 @@ class UserService {
     'Content-Type': 'application/json',
   };
 
-  Future<UserModel> getUser(String id) async {
+  Future<UserModel?> getUser(int id) async {
     try {
       Response response = await _apiConst.sendApiReq.get(
         '/user/$id',
@@ -20,24 +20,28 @@ class UserService {
       if (response.statusCode == 200) {
         return UserModel.fromJson(response.data);
       }
-      return UserModel();
+      return null;
     } catch (e) {
       log("Error Get User: $e --> getUser(UserService)");
       rethrow;
     }
   }
 
-  Future<UserModel> updateUser(String id, UserModel user) async {
+  Future<UserModel?> updateUser(int id, UserModel user) async {
     try {
       Response response = await _apiConst.sendApiReq.put(
         '/user/$id',
-        data: user.toJson(),
+        data: {
+          "name": user.name,
+          "email": user.email,
+          "age": user.age,
+        },
         options: Options(headers: headers),
       );
       if (response.statusCode == 200) {
         return UserModel.fromJson(response.data);
       }
-      return UserModel();
+      return null;
     } catch (e) {
       log("Error Update User: $e --> updateUser(UserService)");
       rethrow;

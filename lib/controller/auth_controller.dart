@@ -33,9 +33,10 @@ class AuthController extends ChangeNotifier {
   Future<bool> login(String username, String password) async {
     isLoading = true;
     try {
-      final accessToken = await _authService.login(username, password);
-      if (accessToken != null) {
-        _sharedPreferencesHelper.setToken(accessToken);
+      final userData = await _authService.login(username, password);
+      if (userData != null) {
+        _sharedPreferencesHelper.setToken(userData[0]);
+        _sharedPreferencesHelper.setId(userData[1]);
         return true;
       }
       return false;
@@ -50,9 +51,12 @@ class AuthController extends ChangeNotifier {
   Future<bool> register(String email, String password) async {
     isLoading = true;
     try {
-      final accessToken = await _authService.register(email, password);
-      if (accessToken != null) {
-        _sharedPreferencesHelper.setToken(accessToken);
+      final userData = await _authService.register(email, password);
+      if (userData != null) {
+        _sharedPreferencesHelper.setToken(
+          userData[0],
+        );
+        _sharedPreferencesHelper.setId(userData[1]);
         return true;
       }
       return false;
@@ -67,7 +71,7 @@ class AuthController extends ChangeNotifier {
   Future<bool> logout() async {
     isLoading = true;
     try {
-      await _sharedPreferencesHelper.removeToken();
+      await _sharedPreferencesHelper.removeAll();
       return true;
     } catch (e) {
       log("Error Logout: $e --> logout(AuthController)");

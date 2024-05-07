@@ -7,6 +7,8 @@ import 'package:localloud/utils/routes/routes.dart';
 import 'package:localloud/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 
+import 'controller/user_controller.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -14,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ThemeController()),
         ChangeNotifierProvider(create: (_) => HomeController()),
         ChangeNotifierProvider(create: (_) => AuthController()),
+        ChangeNotifierProvider(create: (_) => UserController()),
       ],
       child: LocalLoud(
         appTheme: AppTheme(),
