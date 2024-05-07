@@ -43,7 +43,9 @@ class PostCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "@${post.user!.username!}",
+                        post.user?.username != ""
+                            ? "@${post.user!.username}"
+                            : "@LocalLoudBot",
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               fontSize: 13.0,
                             ),
@@ -88,6 +90,28 @@ class PostCard extends StatelessWidget {
               Text(
                 post.postContent!,
               ),
+              verticalSpace(10.0),
+              post.isPoll!
+                  ? Column(
+                      children: [
+                        _polls(post.pollA!, () {
+                          postController.votePoll(post.id!, 'A');
+                        }, post.pollAVotes != 0),
+                        verticalSpace(5.0),
+                        _polls(post.pollB!, () {
+                          postController.votePoll(post.id!, 'B');
+                        }, post.pollBVotes != 0),
+                        verticalSpace(5.0),
+                        _polls(post.pollC!, () {
+                          postController.votePoll(post.id!, 'C');
+                        }, post.pollCVotes != 0),
+                        verticalSpace(5.0),
+                        _polls(post.pollD!, () {
+                          postController.votePoll(post.id!, 'D');
+                        }, post.pollDVotes != 0),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
               Row(
                 children: [
                   IconButton(
@@ -134,5 +158,42 @@ class PostCard extends StatelessWidget {
         ),
       );
     });
+  }
+
+  Widget _polls(String options, void Function()? onTap, bool enabled) {
+    return InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            TickerMode(
+              enabled: enabled,
+              child: Icon(
+                enabled ? CupertinoIcons.circle_fill : CupertinoIcons.circle,
+                color: enabled ? AppColors.green : null,
+              ),
+            ),
+            horizontalSpace(5.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  options,
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                  ),
+                ),
+                verticalSpace(2.0),
+                Container(
+                  height: 5.0,
+                  width: 100.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: enabled ? AppColors.green : Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ));
   }
 }

@@ -26,6 +26,14 @@ class PostController extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _postType = "post";
+  String get postType => _postType;
+
+  set postType(String postType) {
+    _postType = postType;
+    notifyListeners();
+  }
+
   Future<bool> createPost(String postContent) async {
     isLoading = true;
     try {
@@ -110,27 +118,41 @@ class PostController extends ChangeNotifier {
     }
   }
 
-  Future<void> createPoll(String userId, PostModel options) async {
+  Future<bool> createPoll(PostModel options) async {
     isLoading = true;
     try {
-      final post = await _postService.createPoll(userId, options);
+      // Get user id
+      final userId = await _sharedPreferenceHelper.getId();
+      // create poll
+      final post = await _postService.createPoll(userId!, options);
       if (post != null) {
-        posts.add(post);
+        getPosts();
+        return true;
       }
+      return false;
     } catch (e) {
       log("Error creating poll: $e --> PostController.createPoll");
+      return false;
     } finally {
       isLoading = false;
     }
   }
 
-  Future<void> votePoll(String postId, String option) async {
+  Future<void> votePoll(int postId, String option) async {
     isLoading = true;
     try {
       final post = await _postService.votePoll(postId, option);
       if (post != null) {
         final index = posts.indexWhere((element) => element.id == post.id);
-        posts[index] = post;
+        if (option == "A") {
+          posts[index].pollAVotes = post.pollAVotes;
+        } else if (option == "B") {
+          posts[index].pollBVotes = post.pollBVotes;
+        } else if (option == "C") {
+          posts[index].pollCVotes = post.pollCVotes;
+        } else if (option == "D") {
+          posts[index].pollDVotes = post.pollDVotes;
+        }
       }
     } catch (e) {
       log("Error voting poll: $e --> PostController.votePoll");

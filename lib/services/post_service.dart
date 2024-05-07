@@ -95,19 +95,18 @@ class PostService {
     }
   }
 
-  Future<PostModel?> createPoll(String userId, PostModel options) async {
+  Future<PostModel?> createPoll(int userId, PostModel options) async {
     try {
-      Response response = await _apiConst.sendApiReq.put(
+      Response response = await _apiConst.sendApiReq.post(
         '/posts/$userId/poll',
         data: {
-          {
-            "postContent": options.postContent,
-            "pollA": options.pollA,
-            "pollB": options.pollB,
-            "pollC": options.pollC,
-            "pollD": options.pollD,
-          }
+          "postContent": options.postContent,
+          "pollA": options.pollA,
+          "pollB": options.pollB,
+          "pollC": options.pollC,
+          "pollD": options.pollD,
         },
+        options: Options(headers: headers),
       );
       if (response.statusCode == 201) {
         return PostModel.fromJson(response.data);
@@ -119,10 +118,10 @@ class PostService {
     }
   }
 
-  Future<PostModel?> votePoll(String id, String option) async {
+  Future<PostModel?> votePoll(int id, String option) async {
     try {
       Response response = await _apiConst.sendApiReq.put(
-        '/posts/$id/vote',
+        '/posts/$id/vote-poll',
         data: {
           "option": option,
         },

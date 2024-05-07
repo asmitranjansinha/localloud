@@ -120,7 +120,7 @@ class AppTheme {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.lightBackground,
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: AppColors.dark,
         ),
         popupMenuTheme: const PopupMenuThemeData(
@@ -231,7 +231,7 @@ class AppTheme {
             letterSpacing: 2,
           ),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: AppColors.light,
         ),
         popupMenuTheme: const PopupMenuThemeData(
@@ -262,4 +262,6 @@ class AppColors {
   static const translucent = Color(0x99FFFFFF);
   static const lightGrey = Color(0xFFD3D3D3);
   static const red = Color(0xFFDC143C);
+  static const slightRed = Color(0xFFE9967A);
+  static const green = Color(0xFF228B22);
 }
