@@ -57,7 +57,7 @@ class UserController extends ChangeNotifier {
   void updateUserProfileFields() {
     nameController.text = _user.name ?? '';
     emailController.text = _user.email ?? '';
-    ageController.text = _user.age.toString();
+    ageController.text = _user.age != null ? _user.age.toString() : '';
     notifyListeners();
   }
 

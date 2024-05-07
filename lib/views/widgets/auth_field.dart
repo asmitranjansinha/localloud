@@ -10,6 +10,7 @@ class AuthTextField extends StatefulWidget {
   final String hintText;
   final IconData? prefixIcon;
   final String? Function(String?)? validator;
+  final int? maxLine;
   const AuthTextField({
     super.key,
     this.controller,
@@ -17,6 +18,7 @@ class AuthTextField extends StatefulWidget {
     required this.hintText,
     this.prefixIcon,
     this.validator,
+    this.maxLine,
   });
 
   @override
@@ -39,6 +41,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
             ? AppColors.lightBackground
             : AppColors.darkBackground,
       ),
+      maxLines: widget.isPasswordField ? 1 : widget.maxLine,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

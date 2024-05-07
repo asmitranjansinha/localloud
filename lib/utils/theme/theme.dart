@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  final localloudTheme = ThemeData();
+  final localloudTheme = ThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            60.0,
+          ),
+        ),
+      ),
+    ),
+  );
 
   ThemeData get light => localloudTheme.copyWith(
         scaffoldBackgroundColor: AppColors.lightBackground,
@@ -9,6 +20,10 @@ class AppTheme {
           color: AppColors.lightBackground,
         ),
 
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: AppColors.lightBackground,
+          showDragHandle: true,
+        ),
         // text related theme
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
@@ -101,6 +116,15 @@ class AppTheme {
             color: AppColors.dark,
             letterSpacing: 2,
           ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.lightBackground,
+        ),
+        iconTheme: IconThemeData(
+          color: AppColors.dark,
+        ),
+        popupMenuTheme: const PopupMenuThemeData(
+          color: AppColors.lightBackground,
         ),
       );
 
@@ -109,6 +133,10 @@ class AppTheme {
         appBarTheme: const AppBarTheme(
           color: AppColors.darkBackground,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: AppColors.darkBackground,
+          showDragHandle: true,
+        ),
 
         // text related theme
         textTheme: const TextTheme(
@@ -203,12 +231,27 @@ class AppTheme {
             letterSpacing: 2,
           ),
         ),
+        iconTheme: IconThemeData(
+          color: AppColors.light,
+        ),
+        popupMenuTheme: const PopupMenuThemeData(
+          color: AppColors.dark,
+          textStyle: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+            color: AppColors.light,
+            letterSpacing: 2,
+          ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.darkBackground,
+        ),
       );
 }
 
 class AppColors {
   static const lightBackground = Color(0XffE5E4E2);
-  static const darkBackground = Color(0Xff36454F);
+  static const darkBackground = Color(0Xff1A1A1A);
   static const primary = Color(0XffFF5733);
   static const dark = Colors.black;
   static const lessDark = Color(0xFF333333);

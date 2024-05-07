@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:localloud/controller/auth_controller.dart';
+import 'package:localloud/controller/user_controller.dart';
 import 'package:localloud/views/widgets/app_button.dart';
 import 'package:localloud/views/widgets/auth_field.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthController>(builder: (context, authController, child) {
+    return Consumer2<AuthController, UserController>(
+        builder: (context, authController, userController, child) {
       return Scaffold(
         backgroundColor: Colors.redAccent.shade100,
         body: Padding(
@@ -84,6 +86,7 @@ class LoginView extends StatelessWidget {
                           );
                         }
                       }
+                      userController.getUser();
                     }
                   },
                   title: authController.isRegisterMode ? "Register" : "Login",
