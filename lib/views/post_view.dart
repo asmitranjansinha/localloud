@@ -1,7 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:localloud/controller/post_controller.dart';
 import 'package:localloud/models/post_model.dart';
 import 'package:localloud/utils/constants/app_dimensions.dart';
@@ -42,15 +43,23 @@ class PostView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: postController.posts.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return PostCard(
-                    post: postController.posts[index],
-                  );
-                }),
+            child: postController.posts.isEmpty
+                ? const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "No one posted anything.\nTry posting something!",
+                      textAlign: TextAlign.center,
+                    ))
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: postController.posts.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      log("Posts --> ${postController.posts.length}");
+                      return PostCard(
+                        post: postController.posts[index],
+                      );
+                    }),
           ),
         ),
         floatingActionButton: FloatingActionButton(

@@ -56,8 +56,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
           fontSize: double.tryParse("15.0"),
           fontWeight: FontWeight.w500,
           color: context.read<ThemeController>().isDarkMode
-              ? AppColors.lightBackground
-              : AppColors.darkBackground,
+              ? AppColors.translucent
+              : AppColors.lessDark,
         ),
         prefixIcon: widget.prefixIcon != null
             ? Icon(
