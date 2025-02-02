@@ -4,25 +4,20 @@ LocalLoud is a mobile application built with Flutter that allows users to partic
 
 ## 📸 Screenshots
 
-#### Login
+### Login | Home | Settings
 
-<img src="assets/screenshots/screenshot1.jpeg" width="190" height="400">
+<p align="center">
+    <img src="assets/screenshots/screenshot1.jpeg" width="190" height="400">
+    <img src="assets/screenshots/screenshot2.jpeg" width="190" height="400">
+    <img src="assets/screenshots/screenshot5.jpeg" width="190" height="400">
+</p>
 
-#### Home
+### Add Post | Add Vote Poll
 
-<img src="assets/screenshots/screenshot2.jpeg" width="190" height="400">
-
-#### Add Post
-
-<img src="assets/screenshots/screenshot3.jpeg" width="190" height="400">
-
-#### Add Vote Poll
-
-<img src="assets/screenshots/screenshot4.jpeg" width="190" height="400">
-
-#### Settings
-
-<img src="assets/screenshots/screenshot5.jpeg" width="190" height="400">
+<p align="center">
+   <img src="assets/screenshots/screenshot3.jpeg" width="190" height="400">   
+    <img src="assets/screenshots/screenshot4.jpeg" width="190" height="400">
+</p>
 
 ## ✨ Features
 
